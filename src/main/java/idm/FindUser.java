@@ -1,5 +1,6 @@
 package idm;
 
+import java.util.ArrayList;
 import java.util.List;
 import oracle.iam.identity.usermgmt.api.UserManager;
 import oracle.iam.identity.usermgmt.api.UserManagerConstants;
@@ -46,7 +47,7 @@ public class FindUser {
 			
 			// Combines criterias
 			SearchCriteria scFinalCriteria = new SearchCriteria(scUserLogin, scStatus, SearchCriteria.Operator.AND);
-			
+						
 			// Finds and gets user
 			List<User> users = userManager.search(scFinalCriteria, null, null);
 			user = users.get(0);
