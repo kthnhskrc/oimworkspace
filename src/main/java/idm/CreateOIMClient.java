@@ -1,7 +1,5 @@
 package idm;
-
 import java.util.Hashtable;
-
 import oracle.iam.platform.OIMClient;
 
 public class CreateOIMClient {
