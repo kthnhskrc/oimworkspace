@@ -11,7 +11,7 @@ public class FindUser {
 
 	public static void main(String[] args) throws Exception {
 
-		User user = findUserByUserLogin("KTHNHSKRC");
+		User user = findUserByUserLogin("KTHNHSKRC", "Active");
 
 		// Prints user attributes
 		if (user != null) {
@@ -19,7 +19,6 @@ public class FindUser {
 			System.out.println("LastName:" + user.getLastName());
 			System.out.println("Email:" + user.getEmail());
 		}
-
 	}
 
 	/**
@@ -28,7 +27,7 @@ public class FindUser {
 	 * @param userLogin
 	 * @return user
 	 */
-	public static User findUserByUserLogin(String userLogin) {
+	public static User findUserByUserLogin(String userLogin, String userStatus) {
 		// Creates user instance
 		User user = null;
 
@@ -36,14 +35,20 @@ public class FindUser {
 			// Calls OimClient
 			OIMClient client = CreateOIMClient.createClient();
 
-			// Initiate userManager
+			// Initiates userManager
 			UserManager userManager = client.getService(UserManager.class);
 
-			// Create search criteria with userlogin
-			SearchCriteria criteria = new SearchCriteria(UserManagerConstants.AttributeName.USER_LOGIN.getId(), userLogin, SearchCriteria.Operator.EQUAL);
-
+			// Creates search criteria with userlogin
+			SearchCriteria scUserLogin = new SearchCriteria(UserManagerConstants.AttributeName.USER_LOGIN.getId(), userLogin, SearchCriteria.Operator.EQUAL);
+			
+			// Creates search criteria with status
+			SearchCriteria scStatus = new SearchCriteria(UserManagerConstants.AttributeName.STATUS.getId(), userStatus, SearchCriteria.Operator.EQUAL);
+			
+			// Combines criterias
+			SearchCriteria scFinalCriteria = new SearchCriteria(scUserLogin, scStatus, SearchCriteria.Operator.AND);
+			
 			// Finds and gets user
-			List<User> users = userManager.search(criteria, null, null);
+			List<User> users = userManager.search(scFinalCriteria, null, null);
 			user = users.get(0);
 
 		} catch (Exception e) {
