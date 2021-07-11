@@ -14,6 +14,12 @@ public class CreateOIMClient {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/**
+	 * This method creates oim client
+	 * 
+	 * @author kthnhskrc
+	 * @return oimclient
+	 */
 	public static OIMClient createClient() {
 		// Creates OIM client object
 		OIMClient oimClient = new OIMClient();
@@ -34,7 +40,10 @@ public class CreateOIMClient {
 			System.setProperty("java.security.auth.login.config", "/authwl.conf");
 			System.setProperty("APPSERVER_TYPE", "wls");
 
+			// Initiates client with oim environment variables
 			oimClient = new OIMClient(env);
+
+			// Logins oim
 			oimClient.login(username, password.toCharArray());
 
 		} catch (Exception e) {
