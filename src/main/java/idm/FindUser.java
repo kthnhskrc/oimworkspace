@@ -1,6 +1,5 @@
 package idm;
 
-import java.util.ArrayList;
 import java.util.List;
 import oracle.iam.identity.usermgmt.api.UserManager;
 import oracle.iam.identity.usermgmt.api.UserManagerConstants;
@@ -11,7 +10,6 @@ import oracle.iam.platform.entitymgr.vo.SearchCriteria;
 public class FindUser {
 
 	public static void main(String[] args) throws Exception {
-
 		User user = findUserByUserLogin("KTHNHSKRC", "Active");
 
 		// Prints user attributes
@@ -40,14 +38,16 @@ public class FindUser {
 			UserManager userManager = client.getService(UserManager.class);
 
 			// Creates search criteria with userlogin
-			SearchCriteria scUserLogin = new SearchCriteria(UserManagerConstants.AttributeName.USER_LOGIN.getId(), userLogin, SearchCriteria.Operator.EQUAL);
-			
+			SearchCriteria scUserLogin = new SearchCriteria(UserManagerConstants.AttributeName.USER_LOGIN.getId(),
+					userLogin, SearchCriteria.Operator.EQUAL);
+
 			// Creates search criteria with status
-			SearchCriteria scStatus = new SearchCriteria(UserManagerConstants.AttributeName.STATUS.getId(), userStatus, SearchCriteria.Operator.EQUAL);
-			
+			SearchCriteria scStatus = new SearchCriteria(UserManagerConstants.AttributeName.STATUS.getId(), userStatus,
+					SearchCriteria.Operator.EQUAL);
+
 			// Combines criterias
 			SearchCriteria scFinalCriteria = new SearchCriteria(scUserLogin, scStatus, SearchCriteria.Operator.AND);
-						
+
 			// Finds and gets user
 			List<User> users = userManager.search(scFinalCriteria, null, null);
 			user = users.get(0);
@@ -58,5 +58,5 @@ public class FindUser {
 
 		return user;
 	}
-	
+
 }

@@ -7,9 +7,9 @@ import oracle.iam.provisioning.vo.ApplicationInstance;
 public class FindApplicationInstance {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ApplicationInstance applicationInstance = getApplicationInstance("Active Directory");
 		
+		// Prints application informations
 		if(applicationInstance != null) {
 			applicationInstance.getDisplayName();
 			applicationInstance.getItResourceKey();
@@ -18,7 +18,6 @@ public class FindApplicationInstance {
 	}
 
 	public static ApplicationInstance getApplicationInstance(String applicationInstanceName) {
-
 		// Initializes application instance
 		ApplicationInstance appInstance = null;
 
@@ -27,6 +26,7 @@ public class FindApplicationInstance {
 		ApplicationInstanceService appInstService = oimClient.getService(ApplicationInstanceService.class);
 
 		try {
+			// Gets application instance information
 			appInstance = appInstService.findApplicationInstanceByName(applicationInstanceName);
 		} catch (Exception e) {
 			System.out.println("Exception while creating OIMClient: " + e.getMessage());

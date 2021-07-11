@@ -1,4 +1,5 @@
 package idm;
+
 import java.util.Hashtable;
 import oracle.iam.platform.OIMClient;
 
@@ -14,7 +15,6 @@ public class CreateOIMClient {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	/**
 	 * This method creates oim client
-	 * 
 	 * @author kthnhskrc
 	 * @return oimclient
 	 */
